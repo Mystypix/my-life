@@ -1,0 +1,11 @@
+# Make this config root
+root = true
+
+# Settings for source files
+[*.{js,jsx,ts,tsx,json}]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = tab
+insert_final_newline = true
+trim_trailing_whitespace = true
