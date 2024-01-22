@@ -1,42 +1,21 @@
-import { createBrowserRouter } from 'react-router-dom'
-import { SignUpPage } from './pages/Signup'
-import { RequireAuth } from './auth/RequireAuth'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { PublicRoute } from './auth/PublicRoute'
+import { SignUpPage } from './pages/SignUp'
+import { SignInPage } from './pages/SignIn'
+import { RecipeList } from './pages/food/RecipeList'
+import { PrivateRoute } from './auth/PrivateRoute'
 
-export const router = createBrowserRouter([
-	{
-		path: '/',
-		element: <SignUpPage />,
-	},
-	{
-		path: '/diary',
-		element: (
-			<RequireAuth>
-				<div>Diary</div>
-			</RequireAuth>
-		),
-	},
-	{
-		path: '/food',
-		element: (
-			<RequireAuth>
-				<div>Food</div>
-			</RequireAuth>
-		),
-	},
-	{
-		path: '/people',
-		element: (
-			<RequireAuth>
-				<div>People</div>
-			</RequireAuth>
-		),
-	},
-	{
-		path: '/todo',
-		element: (
-			<RequireAuth>
-				<div>Todo</div>
-			</RequireAuth>
-		),
-	},
-])
+export const Router = () => (
+	<BrowserRouter>
+		<Routes>
+			<Route element={<PublicRoute />}>
+				<Route path='/sign-in' element={<SignInPage />} />
+				<Route path='/sign-up' element={<SignUpPage />} />
+			</Route>
+			<Route element={<PrivateRoute />}>
+				<Route path='/food' element={<RecipeList />} />
+				<Route path='/food/add-recipe' element={<AddRecipe />} />
+			</Route>
+		</Routes>
+	</BrowserRouter>
+)
